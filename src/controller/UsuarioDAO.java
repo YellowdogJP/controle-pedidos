@@ -43,7 +43,7 @@ public class UsuarioDAO {
 
         try {
             //1 passo - SQL
-            String sql = "select * from usuarios where nome = ? and senha = md5(?)";
+            String sql = "select * from usuarios where nome = ? and senha = md5sum(?)";
             PreparedStatement stmt = con.prepareStatement(sql);
             stmt.setString(1, usuario);
             stmt.setString(2, senha);
@@ -88,7 +88,7 @@ public class UsuarioDAO {
 
         try {
             //1 passo - criar o sql
-            String sql = "insert into usuarios(nome, senha, perfil, nome_completo, email) values(?,md5(?),?,?,?)";
+            String sql = "insert into usuarios(nome, senha, perfil, nome_completo, email) values(?,?,?,?,?)";
             //2 passo o conectar o banco de dados e organizar o comando sql
             con = ModuloConexao.conectar();
             PreparedStatement stmt = con.prepareStatement(sql);
@@ -127,7 +127,7 @@ public class UsuarioDAO {
 
         try {
             //1 passo - criar o sql
-            String sql = "update usuarios set nome=?, senha=md5(?), perfil=?, nome_completo=?, email=? where id_usuario=?";
+            String sql = "update usuarios set nome=?, senha=?, perfil=?, nome_completo=?, email=? where id_usuario=?";
             //2 passo o conectar o banco de dados e organizar o comando sql
             con = ModuloConexao.conectar();
             PreparedStatement stmt = con.prepareStatement(sql);
