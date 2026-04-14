@@ -13,6 +13,7 @@ import java.sql.SQLException;
 import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Pattern;
 import javax.swing.JOptionPane;
 import jdbc.ModuloConexao;
 import model.Cliente;
@@ -24,13 +25,13 @@ import model.WebServiceCep;
  * @author clebe
  */
 public class ClienteDAO {
-    
-   Connection con;
-   
-   public ClienteDAO(){
-       con = ModuloConexao.conectar();
-   }
-    
+
+    Connection con;
+
+    public ClienteDAO() {
+        con = ModuloConexao.conectar();
+    }
+
     /**
      * Método responsável por adicionar um novo usuário
      */
@@ -74,11 +75,10 @@ public class ClienteDAO {
             }
         }
     }
-    
+
     public Cliente buscaCep(String cep) {
-       
+
         WebServiceCep webServiceCep = WebServiceCep.searchCep(cep);
-       
 
         Cliente obj = new Cliente();
 
@@ -144,9 +144,11 @@ public class ClienteDAO {
         }
 
     }
-    
+
     /**
      * Método responsável pela pesquisa de clientes pelo nome com filtro
+     * @param nome
+     * @return 
      */
     public List<Cliente> listarClienteNome(String nome) {
         try {
@@ -155,7 +157,7 @@ public class ClienteDAO {
             List<Cliente> lista = new ArrayList<>();
 
             //2 passo - criar o sql , organizar e executar.
-            String sql = "select id_cliente as id, nome, telefone from clientes where nome like ?";
+            String sql = "select * from clientes where nome like ?";
             PreparedStatement stmt;
             stmt = con.prepareStatement(sql);
             stmt.setString(1, nome);
@@ -164,9 +166,21 @@ public class ClienteDAO {
             while (rs.next()) {
                 Cliente obj = new Cliente();
 
-                obj.setId(rs.getInt("id"));
+                obj.setId(rs.getInt("id_cliente"));
                 obj.setNome(rs.getString("nome"));
+                obj.setDocumento(rs.getString("documento"));
+                obj.setTipoCliente(rs.getString("tipo_cliente"));
                 obj.setTelefone(rs.getString("telefone"));
+                obj.setEmail(rs.getString("email"));
+                obj.setLogradouro(rs.getString("logradouro"));
+                obj.setNumero(rs.getString("numero"));
+                obj.setComplemento(rs.getString("complemento"));
+                obj.setBairro(rs.getString("bairro"));
+                obj.setCidade(rs.getString("cidade"));
+                obj.setEstado(rs.getString("estado"));
+                obj.setCep(rs.getString("cep"));
+                obj.setDataCadastro(rs.getDate("data_cadastro"));
+                obj.setObservacoes(rs.getString("observacoes"));
                 lista.add(obj);
             }
 
@@ -179,4 +193,20 @@ public class ClienteDAO {
         }
     }
 
+    public class ValidadorEmail {
+
+        
+        private static final String EMAIL_PATTERN = "^[a-zA-Z0-9_!#$%&'*+/=?`{|}~^-]+(?:\\.[a-zA-Z0-9_!#$%&'*+/=?`{|}~^-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,6}$";
+
+        private static final Pattern PATTERN = Pattern.compile(EMAIL_PATTERN);
+
+        public static boolean isValido(String email) {
+            // No Java 21, isBlank() é mais seguro que conferir apenas null ou empty
+            if (email == null || email.isBlank()) {
+                return false;
+            }
+
+            return PATTERN.matcher(email).matches();
+        }
+    }
 }

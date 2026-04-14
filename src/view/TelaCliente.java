@@ -29,7 +29,7 @@ public class TelaCliente extends javax.swing.JFrame {
     public TelaCliente() {
         initComponents();
     }
-    
+
     //Metodo Listar na tabela
     public void listar() {
 
@@ -45,8 +45,7 @@ public class TelaCliente extends javax.swing.JFrame {
                 c.getDocumento(),
                 c.getTipoCliente(),
                 c.getEmail(),
-                c.getDataCadastro(),
-                });
+                c.getDataCadastro(),});
 
         }
 
@@ -119,6 +118,12 @@ public class TelaCliente extends javax.swing.JFrame {
 
         jLabel10.setText("Cidade");
 
+        jTxtNome.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jTxtNomeKeyPressed(evt);
+            }
+        });
+
         jTxtNumero.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTxtNumeroActionPerformed(evt);
@@ -176,6 +181,11 @@ public class TelaCliente extends javax.swing.JFrame {
                 "Nome", "Documento", "Tipo Cliente", "E-mail", "Data Cadastro"
             }
         ));
+        jTblClientes.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTblClientesMouseClicked(evt);
+            }
+        });
         jScrollPane2.setViewportView(jTblClientes);
 
         jBtnAdicionar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/create.png"))); // NOI18N
@@ -349,8 +359,8 @@ public class TelaCliente extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 173, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 167, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jBtnEditar, javax.swing.GroupLayout.Alignment.TRAILING)
@@ -494,6 +504,38 @@ public class TelaCliente extends javax.swing.JFrame {
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         listar();
     }//GEN-LAST:event_formWindowOpened
+
+    private void jTblClientesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTblClientesMouseClicked
+        jTxtNome.setText(jTblClientes.getValueAt(jTblClientes.getSelectedRow(), 0).toString());
+        jTxtDocumento.setText(jTblClientes.getValueAt(jTblClientes.getSelectedRow(), 1).toString());
+        jTxtDocumento.setText(jTblClientes.getValueAt(jTblClientes.getSelectedRow(), 1).toString());
+        String tipo = jTblClientes.getValueAt(jTblClientes.getSelectedRow(), 2).toString();
+//        if (tipo.equals("Pessoa Física")) {
+//            jRdBtnFisica.setSelected(true);
+//            jRdBtnJuridica.setSelected(false);
+//        } else if (tipo.equals("Pessoa Jurídica")) {
+//            jRdBtnFisica.setSelected(false);
+//            jRdBtnJuridica.setSelected(true);
+//        }
+
+        switch (tipo) {
+            case "Pessoa Jurídica":
+                jRdBtnFisica.setSelected(false);
+                jRdBtnJuridica.setSelected(true);
+                break;
+            case "Pessoa Física":
+                jRdBtnFisica.setSelected(true);
+                jRdBtnJuridica.setSelected(false);
+                break;
+            default:
+                throw new AssertionError();
+        }
+
+    }//GEN-LAST:event_jTblClientesMouseClicked
+
+    private void jTxtNomeKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTxtNomeKeyPressed
+        
+    }//GEN-LAST:event_jTxtNomeKeyPressed
 
     /**
      * @param args the command line arguments
