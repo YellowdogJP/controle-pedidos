@@ -43,7 +43,7 @@ public class UsuarioDAO {
 
         try {
             //1 passo - SQL
-            String sql = "select * from usuarios where nome = ? and senha = md5sum(?)";
+            String sql = "select * from usuarios where nome = ? and senha = ?";
             PreparedStatement stmt = con.prepareStatement(sql);
             stmt.setString(1, usuario);
             stmt.setString(2, senha);
