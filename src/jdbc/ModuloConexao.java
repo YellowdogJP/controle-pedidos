@@ -19,7 +19,7 @@ public class ModuloConexao {
         //armazenando informações referente ao banco de dados
         String url = "jdbc:mysql://127.0.0.1:3306/gestaopedidos?characterEncoding=utf-8"; //useTimezone=true&serverTimezone=UTC
         String user = "root";
-        String senha = "yellow-pw";
+        String senha = "root";
         //estabelecer a conexão com o banco
         try {
             Class.forName(driver);
