@@ -192,6 +192,11 @@ public class TelaCliente extends javax.swing.JFrame {
         jBtnAdicionar.setToolTipText("Adiconar Usuário");
         jBtnAdicionar.setMaximumSize(new java.awt.Dimension(80, 80));
         jBtnAdicionar.setMinimumSize(new java.awt.Dimension(80, 80));
+        jBtnAdicionar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jBtnAdicionarMouseClicked(evt);
+            }
+        });
         jBtnAdicionar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jBtnAdicionarActionPerformed(evt);
@@ -201,6 +206,11 @@ public class TelaCliente extends javax.swing.JFrame {
         jBtnEditar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/update.png"))); // NOI18N
         jBtnEditar.setToolTipText("Editar Usuário");
         jBtnEditar.setEnabled(false);
+        jBtnEditar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jBtnEditarMouseClicked(evt);
+            }
+        });
         jBtnEditar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jBtnEditarActionPerformed(evt);
@@ -510,6 +520,8 @@ public class TelaCliente extends javax.swing.JFrame {
         jTxtDocumento.setText(jTblClientes.getValueAt(jTblClientes.getSelectedRow(), 1).toString());
         jTxtDocumento.setText(jTblClientes.getValueAt(jTblClientes.getSelectedRow(), 1).toString());
         String tipo = jTblClientes.getValueAt(jTblClientes.getSelectedRow(), 2).toString();
+        jBtnExcluir.setEnabled(true);
+        jBtnEditar.setEnabled(true);
 //        if (tipo.equals("Pessoa Física")) {
 //            jRdBtnFisica.setSelected(true);
 //            jRdBtnJuridica.setSelected(false);
@@ -536,6 +548,14 @@ public class TelaCliente extends javax.swing.JFrame {
     private void jTxtNomeKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTxtNomeKeyPressed
         
     }//GEN-LAST:event_jTxtNomeKeyPressed
+
+    private void jBtnAdicionarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBtnAdicionarMouseClicked
+        
+    }//GEN-LAST:event_jBtnAdicionarMouseClicked
+
+    private void jBtnEditarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBtnEditarMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jBtnEditarMouseClicked
 
     /**
      * @param args the command line arguments
