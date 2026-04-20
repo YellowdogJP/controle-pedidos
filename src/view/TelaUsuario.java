@@ -275,7 +275,7 @@ public class TelaUsuario extends javax.swing.JFrame {
         jCbxPerfil.setSelectedItem(jTblUsuario.getValueAt(jTblUsuario.getSelectedRow(), 3).toString());
         jTxtNomeCompleto.setText(jTblUsuario.getValueAt(jTblUsuario.getSelectedRow(), 4).toString());
         jTxtEmail.setText(jTblUsuario.getValueAt(jTblUsuario.getSelectedRow(), 5).toString());
-        jBtnAdicionar.setEnabled(false);
+        jBtnAdicionar.setEnabled(true);
         jBtnEditar.setEnabled(true);
         jBtnExcluir.setEnabled(true);
 
