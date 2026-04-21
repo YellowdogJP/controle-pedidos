@@ -1,5 +1,4 @@
 package controller;
-
 import java.awt.Color;
 import java.awt.HeadlessException;
 import java.sql.Connection;
@@ -43,10 +42,10 @@ public class UsuarioDAO {
 
         try {
             //1 passo - SQL
-            String sql = "select * from usuarios where nome = ? and senha = md5(?)";
+            String sql = "select * from usuarios where nome = ? and senha = ?";
             PreparedStatement stmt = con.prepareStatement(sql);
             stmt.setString(1, usuario);
-            stmt.setString(2, senha);
+            stmt.setString(2, GerarHashMD5.gerarHashMD5(senha));
 
             ResultSet rs = stmt.executeQuery();
             
@@ -84,16 +83,17 @@ public class UsuarioDAO {
     /**
      * Método responsável por adicionar um novo usuário
      */
-    public void adicionarUsuario(Usuario obj) {
+    public void adicionarUsuario(Usuario obj) throws Exception {
 
         try {
             //1 passo - criar o sql
-            String sql = "insert into usuarios(nome, senha, perfil, nome_completo, email) values(?,md5(?),?,?,?)";
+            String sql = "insert into usuarios(nome, senha, perfil, nome_completo, email) values(?,?,?,?,?)";
             //2 passo o conectar o banco de dados e organizar o comando sql
             con = ModuloConexao.conectar();
             PreparedStatement stmt = con.prepareStatement(sql);
             stmt.setString(1, obj.getNome());
-            stmt.setString(2, obj.getSenha());
+            String hash = GerarHashMD5.gerarHashMD5(obj.getSenha());
+            stmt.setString(2, hash);
             stmt.setString(3, obj.getPerfil());
             stmt.setString(4, obj.getNomeCompleto());
             stmt.setString(5, obj.getEmail());
@@ -123,7 +123,7 @@ public class UsuarioDAO {
      * @param Objeto do tipo Usuario
      *
      */
-    public void alterarUsuario(Usuario obj) {
+    public void alterarUsuario(Usuario obj) throws Exception {
 
         try {
             //1 passo - criar o sql
@@ -132,7 +132,8 @@ public class UsuarioDAO {
             con = ModuloConexao.conectar();
             PreparedStatement stmt = con.prepareStatement(sql);
             stmt.setString(1, obj.getNome());
-            stmt.setString(2, obj.getSenha());
+            String hash = GerarHashMD5.gerarHashMD5(obj.getSenha());
+            stmt.setString(2, hash);
             stmt.setString(3, obj.getPerfil());
             stmt.setString(4, obj.getNomeCompleto());
             stmt.setString(5, obj.getEmail());
@@ -217,5 +218,6 @@ public class UsuarioDAO {
         }
 
     }
-
+    /** Método para gerar Strings usando api do java */
+    
 }

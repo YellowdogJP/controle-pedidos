@@ -243,24 +243,28 @@ public class TelaUsuario extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Preencha todos os campos!!!");
         } else {
 
-            String nome = jTxtNomeUsuario.getText();
-            String senha = jTxtSenha.getText();
-            String perfil = jCbxPerfil.getSelectedItem().toString();
-            String nomeCompleto = jTxtNomeCompleto.getText();
-            String email = jTxtEmail.getText();
-
-            Usuario usuario = new Usuario(nome, senha, perfil, nomeCompleto, email);
-
-            UsuarioDAO dao = new UsuarioDAO();
-            dao.adicionarUsuario(usuario);
-            jTxtNomeUsuario.setText("");
-            jTxtEmail.setText(null);
-            jTxtNomeCompleto.setText(null);
-            jTxtSenha.setText(null);
-            jCbxPerfil.setSelectedItem("Usuário");
-            jBtnAdicionar.setEnabled(true);
-            jBtnEditar.setEnabled(false);
-            jBtnExcluir.setEnabled(false);
+            try {
+                String nome = jTxtNomeUsuario.getText();
+                String senha = jTxtSenha.getText();
+                String perfil = jCbxPerfil.getSelectedItem().toString();
+                String nomeCompleto = jTxtNomeCompleto.getText();
+                String email = jTxtEmail.getText();
+                
+                Usuario usuario = new Usuario(nome, senha, perfil, nomeCompleto, email);
+                
+                UsuarioDAO dao = new UsuarioDAO();
+                dao.adicionarUsuario(usuario);
+                jTxtNomeUsuario.setText("");
+                jTxtEmail.setText(null);
+                jTxtNomeCompleto.setText(null);
+                jTxtSenha.setText(null);
+                jCbxPerfil.setSelectedItem("Usuário");
+                jBtnAdicionar.setEnabled(true);
+                jBtnEditar.setEnabled(false);
+                jBtnExcluir.setEnabled(false);
+            } catch (Exception ex) {
+                System.getLogger(TelaUsuario.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+            }
         }
     }//GEN-LAST:event_jBtnAdicionarActionPerformed
 
@@ -287,24 +291,28 @@ public class TelaUsuario extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Preencha todos os campos!!!");
         } else {
 
-            String nome = jTxtNomeUsuario.getText();
-            String senha = jTxtSenha.getText();
-            String perfil = jCbxPerfil.getSelectedItem().toString();
-            String nomeCompleto = jTxtNomeCompleto.getText();
-            String email = jTxtEmail.getText();
-            int id = (int) jTblUsuario.getValueAt(jTblUsuario.getSelectedRow(), 0);
-            Usuario usuario = new Usuario(id, nome, senha, perfil, nomeCompleto, email);
-
-            UsuarioDAO dao = new UsuarioDAO();
-            dao.alterarUsuario(usuario);
-            jTxtNomeUsuario.setText("");
-            jTxtEmail.setText(null);
-            jTxtNomeCompleto.setText(null);
-            jTxtSenha.setText(null);
-            jCbxPerfil.setSelectedItem("Usuário");
-            jBtnAdicionar.setEnabled(true);
-            jBtnEditar.setEnabled(false);
-            jBtnExcluir.setEnabled(false);
+            try {
+                String nome = jTxtNomeUsuario.getText();
+                String senha = jTxtSenha.getText();
+                String perfil = jCbxPerfil.getSelectedItem().toString();
+                String nomeCompleto = jTxtNomeCompleto.getText();
+                String email = jTxtEmail.getText();
+                int id = (int) jTblUsuario.getValueAt(jTblUsuario.getSelectedRow(), 0);
+                Usuario usuario = new Usuario(id, nome, senha, perfil, nomeCompleto, email);
+                
+                UsuarioDAO dao = new UsuarioDAO();
+                dao.alterarUsuario(usuario);
+                jTxtNomeUsuario.setText("");
+                jTxtEmail.setText(null);
+                jTxtNomeCompleto.setText(null);
+                jTxtSenha.setText(null);
+                jCbxPerfil.setSelectedItem("Usuário");
+                jBtnAdicionar.setEnabled(true);
+                jBtnEditar.setEnabled(false);
+                jBtnExcluir.setEnabled(false);
+            } catch (Exception ex) {
+                System.getLogger(TelaUsuario.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+            }
         }
     }//GEN-LAST:event_jBtnEditarActionPerformed
 
