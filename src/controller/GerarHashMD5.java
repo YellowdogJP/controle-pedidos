@@ -12,7 +12,9 @@ import java.security.MessageDigest;
 // Fonte do Código: https://pt.stackoverflow.com/questions/116349/classe-messagedigest-e-hash-com-md5-em-java
 public class GerarHashMD5 {
     public static String gerarHashMD5(String message) throws java.lang.Exception{
+        //Gera o hash MD5 a partir da String Recebida
         byte[] hash = MessageDigest.getInstance("MD5").digest(message.getBytes("UTF-8"));
+        //Retorna o hash MD5 em formato hexadecimal
         return new BigInteger(1, hash).toString(16);
     }
 }
