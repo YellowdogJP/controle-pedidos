@@ -218,6 +218,4 @@ public class UsuarioDAO {
         }
 
     }
-    /** Método para gerar Strings usando api do java */
-    
 }
